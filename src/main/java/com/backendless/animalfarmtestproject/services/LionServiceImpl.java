@@ -1,5 +1,7 @@
 package com.backendless.animalfarmtestproject.services;
 
+import com.backendless.animalfarmtestproject.exceptions.AnimalException;
+import com.backendless.animalfarmtestproject.exceptions.FeedErrors;
 import com.backendless.animalfarmtestproject.models.CowModel;
 import com.backendless.animalfarmtestproject.models.GoatModel;
 import com.backendless.animalfarmtestproject.models.LionModel;
@@ -20,10 +22,12 @@ public class LionServiceImpl implements CarnivorousService<LionModel> {
 
     @Override
     public void eat(Meat food, LionModel lionModel) {
-        if (food.getLion() != null) {
+        if (food.getLion() == null) {
             food.eaten(lionModel);
             lionModel.eat(food);
             lionRepository.save(lionModel);
+        } else {
+            throw new AnimalException(FeedErrors.ANIMAL_ALREADY_EATEN, food);
         }
     }
 
@@ -36,7 +40,8 @@ public class LionServiceImpl implements CarnivorousService<LionModel> {
 
     @Override
     public LionModel getLionByName(String name) {
-        return lionRepository.getLionModelByName(name).orElseThrow();
+        return lionRepository.getLionModelByName(name)
+            .orElseThrow(() -> new AnimalException(FeedErrors.ANIMAL_DOESNT_EXIST, name, "lion"));
     }
 
     @Override

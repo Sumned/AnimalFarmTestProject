@@ -17,7 +17,6 @@ public class CowModel extends Meat implements Herbivorous {
     @OneToMany(mappedBy = "cowEater")
     private List<GrassModel> grass;
 
-
     @Override
     public void eat(Vegetable food) {
         grass.add((GrassModel) food);
