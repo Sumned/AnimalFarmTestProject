@@ -11,4 +11,6 @@ public interface AnimalService<T extends Food, X extends Animal> {
     List<X> getAllAnimals();
 
     void createNewAnimal(String name);
+
+    X getAnimalByName(String name);
 }

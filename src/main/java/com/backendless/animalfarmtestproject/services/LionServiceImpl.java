@@ -47,14 +47,14 @@ public class LionServiceImpl implements CarnivorousService<LionModel> {
 
 
     @Override
-    public LionModel getLionByName(String name) {
+    public LionModel getAnimalByName(String name) {
         return lionRepository.getLionModelByName(name)
             .orElseThrow(() -> new AnimalException(FeedErrors.ANIMAL_DOESNT_EXIST, name, "lion"));
     }
 
     @Override
     public void feedLion(String lionName, String foodName, String foodType) {
-        LionModel lion = getLionByName(lionName);
+        LionModel lion = getAnimalByName(lionName);
         switch (foodType) {
             case "cow" -> eat(cowService.getAnimalByName(foodName), lion);
             case "goat" -> eat(goatService.getAnimalByName(foodName), lion);

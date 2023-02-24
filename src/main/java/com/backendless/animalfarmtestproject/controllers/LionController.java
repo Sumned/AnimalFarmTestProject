@@ -22,7 +22,7 @@ public class LionController {
 
     @GetMapping("/lion")
     public ResponseEntity<LionModel> getLion(@RequestParam String name) {
-        return ResponseEntity.ok(lionService.getLionByName(name));
+        return ResponseEntity.ok(lionService.getAnimalByName(name));
     }
 
     @GetMapping
