@@ -63,6 +63,7 @@ public class LionServiceImpl implements CarnivorousService<LionModel> {
         switch (foodType) {
             case "cow" -> eat(cowService.getAnimalByName(foodName), lion);
             case "goat" -> eat(goatService.getAnimalByName(foodName), lion);
+            default -> throw new AnimalException(FeedErrors.ANIMAL_DOESNT_EXIST, foodType, foodName);
         }
     }
 }
