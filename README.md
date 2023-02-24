@@ -1,5 +1,3 @@
-Для запуску проекту потрібен Docker, IntellijIdea або Gradle.
-
 Схема з поставленого завдання
 
 ![task](readme/ZOO%20OOP%20Problem%20Schema.png)
@@ -14,3 +12,10 @@
 Тому виправлена схема буде виглядати ось так:
 
 ![solution](readme/img.png)
+
+Для запуску проекту потрібен Java 17, Docker, IntellijIdea або Gradle.
+
+Після скачування потрібно запустити в кореневій папці проекту docker-compose up,
+після чого зайти на [http://localhost:8080/](http://localhost:8080/) і через Adminer підключитись до бази данних 
+через користувача 'root' і паролем 'test', після чого імпортувати і виконати спочатку файл database/tables.sql,
+а потім database/tables.sql. 
