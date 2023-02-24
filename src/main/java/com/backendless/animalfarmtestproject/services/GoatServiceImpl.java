@@ -3,6 +3,8 @@ package com.backendless.animalfarmtestproject.services;
 import com.backendless.animalfarmtestproject.exceptions.AnimalException;
 import com.backendless.animalfarmtestproject.exceptions.FeedErrors;
 import com.backendless.animalfarmtestproject.models.GoatModel;
+import com.backendless.animalfarmtestproject.models.GrassModel;
+import com.backendless.animalfarmtestproject.models.Meat;
 import com.backendless.animalfarmtestproject.models.Vegetable;
 import com.backendless.animalfarmtestproject.repositories.GoatRepository;
 import com.backendless.animalfarmtestproject.repositories.GrassRepository;
@@ -46,13 +48,17 @@ public class GoatServiceImpl implements HerbivorousService<GoatModel> {
     @Override
     public List<GoatModel> getAllAnimals() {
         List<GoatModel> goats = goatRepository.findAll();
-        return null;
+        goats.forEach(Meat::eatenBy);
+        return goats;
     }
 
     @Override
     public void feedAnimal(String name) {
-
+        GoatModel goat = getAnimalByName(name);
+        if (goat.getLion() == null) {
+            eat(grassRepository.save(new GrassModel()), goat);
+        } else {
+            throw new AnimalException(FeedErrors.ANIMAL_ALREADY_EATEN, goat);
+        }
     }
-
-
 }
