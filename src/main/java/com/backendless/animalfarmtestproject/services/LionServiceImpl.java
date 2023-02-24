@@ -16,6 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 public class LionServiceImpl implements CarnivorousService<LionModel> {
 
+    private static final String LION = "lion";
+
     private LionRepository lionRepository;
 
     private HerbivorousService<CowModel> cowService;
@@ -40,6 +42,9 @@ public class LionServiceImpl implements CarnivorousService<LionModel> {
 
     @Override
     public void createNewAnimal(String name) {
+        if (lionRepository.getLionModelByName(name).isPresent()) {
+            throw new AnimalException(FeedErrors.ANIMAL_ALREADY_EXIST, name, LION);
+        }
         LionModel lion = new LionModel();
         lion.setName(name);
         lionRepository.save(lion);
@@ -49,7 +54,7 @@ public class LionServiceImpl implements CarnivorousService<LionModel> {
     @Override
     public LionModel getAnimalByName(String name) {
         return lionRepository.getLionModelByName(name)
-            .orElseThrow(() -> new AnimalException(FeedErrors.ANIMAL_DOESNT_EXIST, name, "lion"));
+            .orElseThrow(() -> new AnimalException(FeedErrors.ANIMAL_DOESNT_EXIST, name, LION));
     }
 
     @Override

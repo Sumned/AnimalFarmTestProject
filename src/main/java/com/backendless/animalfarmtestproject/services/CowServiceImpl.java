@@ -16,6 +16,8 @@ import java.util.List;
 @Service(value = "cowService")
 @AllArgsConstructor
 public class CowServiceImpl implements HerbivorousService<CowModel> {
+
+    private static final String COW = "cow";
     private CowRepository cowRepository;
 
     private GrassRepository grassRepository;
@@ -29,6 +31,9 @@ public class CowServiceImpl implements HerbivorousService<CowModel> {
 
     @Override
     public void createNewAnimal(String name) {
+        if (cowRepository.getCowModelByName(name).isPresent()) {
+            throw new AnimalException(FeedErrors.ANIMAL_ALREADY_EXIST, name, COW);
+        }
         CowModel cow = new CowModel();
         cow.setName(name);
         cowRepository.save(cow);
@@ -37,7 +42,7 @@ public class CowServiceImpl implements HerbivorousService<CowModel> {
     @Override
     public CowModel getAnimalByName(String name) {
         CowModel cowModel = cowRepository.getCowModelByName(name)
-            .orElseThrow(() -> new AnimalException(FeedErrors.ANIMAL_DOESNT_EXIST, name, "cow"));
+            .orElseThrow(() -> new AnimalException(FeedErrors.ANIMAL_DOESNT_EXIST, name, COW));
         cowModel.eatenBy();
         return cowModel;
     }
