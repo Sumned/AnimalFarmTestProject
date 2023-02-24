@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(("/lions"))
 @AllArgsConstructor
@@ -18,10 +20,16 @@ public class LionController {
 
     private CarnivorousService<LionModel> lionService;
 
-    @GetMapping
+    @GetMapping("/lion")
     public ResponseEntity<LionModel> getLion(@RequestParam String name) {
         return ResponseEntity.ok(lionService.getLionByName(name));
     }
+
+    @GetMapping
+    public ResponseEntity<List<LionModel>> getLions() {
+        return ResponseEntity.ok(lionService.getAllAnimals());
+    }
+
 
     @PostMapping
     public ResponseEntity<String> createNewLion(@RequestParam String name) {

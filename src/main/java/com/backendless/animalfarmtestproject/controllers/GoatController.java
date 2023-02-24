@@ -20,8 +20,8 @@ import java.util.List;
 public class GoatController {
     private HerbivorousService<GoatModel> goatService;
 
-    @GetMapping("/{name}")
-    public ResponseEntity<GoatModel> getGoat(@PathVariable String name) {
+    @GetMapping("/goat")
+    public ResponseEntity<GoatModel> getGoat(@RequestParam String name) {
         return ResponseEntity.ok(goatService.getAnimalByName(name));
     }
 

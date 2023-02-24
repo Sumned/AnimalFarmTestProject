@@ -10,6 +10,8 @@ import com.backendless.animalfarmtestproject.repositories.LionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("lionService")
 @AllArgsConstructor
 public class LionServiceImpl implements CarnivorousService<LionModel> {
@@ -32,11 +34,17 @@ public class LionServiceImpl implements CarnivorousService<LionModel> {
     }
 
     @Override
+    public List<LionModel> getAllAnimals() {
+        return lionRepository.findAll();
+    }
+
+    @Override
     public void createNewAnimal(String name) {
         LionModel lion = new LionModel();
         lion.setName(name);
         lionRepository.save(lion);
     }
+
 
     @Override
     public LionModel getLionByName(String name) {

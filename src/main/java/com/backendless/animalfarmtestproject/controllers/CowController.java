@@ -20,8 +20,8 @@ import java.util.List;
 public class CowController {
     private HerbivorousService<CowModel> cowService;
 
-    @GetMapping("/{name}")
-    public ResponseEntity<CowModel> getCow(@PathVariable String name) {
+    @GetMapping("/cow")
+    public ResponseEntity<CowModel> getCow(@RequestParam String name) {
         return ResponseEntity.ok(cowService.getAnimalByName(name));
     }
 
