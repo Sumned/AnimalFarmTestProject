@@ -20,8 +20,8 @@ import java.util.List;
 public class GoatController {
     private HerbivorousService<GoatModel> goatService;
 
-    @GetMapping("/goat")
-    public ResponseEntity<GoatModel> getGoat(@RequestParam String name) {
+    @GetMapping("/{name}")
+    public ResponseEntity<GoatModel> getGoat(@PathVariable String name) {
         return ResponseEntity.ok(goatService.getAnimalByName(name));
     }
 
@@ -30,14 +30,14 @@ public class GoatController {
         return ResponseEntity.ok(goatService.getAllAnimals());
     }
 
-    @PostMapping
-    public ResponseEntity<String> createNewGoat(@RequestParam String name) {
+    @PostMapping("/{name}")
+    public ResponseEntity<String> createNewGoat(@PathVariable String name) {
         goatService.createNewAnimal(name);
         return ResponseEntity.ok(String.format("New cow %s created", name));
     }
 
-    @PutMapping("/feed")
-    public ResponseEntity<String> feedGoat(@RequestParam String name) {
+    @PutMapping("/{name}")
+    public ResponseEntity<String> feedGoat(@PathVariable String name) {
         goatService.feedAnimal(name);
         return ResponseEntity.ok(String.format("Cow %s fed", name));
     }

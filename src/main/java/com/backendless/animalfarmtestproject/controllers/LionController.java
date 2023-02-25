@@ -5,6 +5,7 @@ import com.backendless.animalfarmtestproject.services.CarnivorousService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,8 @@ public class LionController {
 
     private CarnivorousService<LionModel> lionService;
 
-    @GetMapping("/lion")
-    public ResponseEntity<LionModel> getLion(@RequestParam String name) {
+    @GetMapping("/{name}")
+    public ResponseEntity<LionModel> getLion(@PathVariable String name) {
         return ResponseEntity.ok(lionService.getAnimalByName(name));
     }
 
@@ -31,17 +32,17 @@ public class LionController {
     }
 
 
-    @PostMapping
-    public ResponseEntity<String> createNewLion(@RequestParam String name) {
+    @PostMapping("/{name}")
+    public ResponseEntity<String> createNewLion(@PathVariable String name) {
         lionService.createNewAnimal(name);
         return ResponseEntity.ok(String.format("New lion %s created", name));
     }
 
-    @PutMapping("/feed")
-    public ResponseEntity<String> feedLion(@RequestParam String lionName,
+    @PutMapping("/{name}")
+    public ResponseEntity<String> feedLion(@PathVariable String name,
                                            @RequestParam String foodName,
                                            @RequestParam String foodType) {
-        lionService.feedLion(lionName, foodName, foodType);
-        return ResponseEntity.ok(String.format("Lion %s fed by %S", lionName, foodName));
+        lionService.feedLion(name, foodName, foodType);
+        return ResponseEntity.ok(String.format("Lion %s fed by %S", name, foodName));
     }
 }
