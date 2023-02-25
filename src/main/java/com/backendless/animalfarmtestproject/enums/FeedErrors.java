@@ -1,4 +1,4 @@
-package com.backendless.animalfarmtestproject.exceptions;
+package com.backendless.animalfarmtestproject.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

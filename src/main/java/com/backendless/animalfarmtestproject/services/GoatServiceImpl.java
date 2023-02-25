@@ -1,7 +1,8 @@
 package com.backendless.animalfarmtestproject.services;
 
+import com.backendless.animalfarmtestproject.enums.Animals;
+import com.backendless.animalfarmtestproject.enums.FeedErrors;
 import com.backendless.animalfarmtestproject.exceptions.AnimalException;
-import com.backendless.animalfarmtestproject.exceptions.FeedErrors;
 import com.backendless.animalfarmtestproject.models.GoatModel;
 import com.backendless.animalfarmtestproject.models.GrassModel;
 import com.backendless.animalfarmtestproject.models.Meat;
@@ -16,8 +17,6 @@ import java.util.List;
 @Service(value = "goatService")
 @AllArgsConstructor
 public class GoatServiceImpl implements HerbivorousService<GoatModel> {
-
-    private static final String GOAT = "goat";
 
     private GoatRepository goatRepository;
 
@@ -34,7 +33,7 @@ public class GoatServiceImpl implements HerbivorousService<GoatModel> {
     @Override
     public void createNewAnimal(String name) {
         if (goatRepository.getGoatModelByName(name).isPresent()) {
-            throw new AnimalException(FeedErrors.ANIMAL_ALREADY_EXIST, name, GOAT);
+            throw new AnimalException(FeedErrors.ANIMAL_ALREADY_EXIST, name, Animals.GOAT.name());
         }
         GoatModel goat = new GoatModel();
         goat.setName(name);
@@ -45,7 +44,7 @@ public class GoatServiceImpl implements HerbivorousService<GoatModel> {
     @Override
     public GoatModel getAnimalByName(String name) {
         GoatModel goatModel = goatRepository.getGoatModelByName(name)
-            .orElseThrow(() -> new AnimalException(FeedErrors.ANIMAL_DOESNT_EXIST, name, GOAT));
+            .orElseThrow(() -> new AnimalException(FeedErrors.ANIMAL_DOESNT_EXIST, name, Animals.GOAT.name()));
         goatModel.eatenBy();
         return goatRepository.getGoatModelByName(name).orElseThrow();
     }

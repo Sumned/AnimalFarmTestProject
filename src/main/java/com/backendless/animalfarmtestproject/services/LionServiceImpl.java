@@ -1,7 +1,8 @@
 package com.backendless.animalfarmtestproject.services;
 
+import com.backendless.animalfarmtestproject.enums.Animals;
 import com.backendless.animalfarmtestproject.exceptions.AnimalException;
-import com.backendless.animalfarmtestproject.exceptions.FeedErrors;
+import com.backendless.animalfarmtestproject.enums.FeedErrors;
 import com.backendless.animalfarmtestproject.models.CowModel;
 import com.backendless.animalfarmtestproject.models.GoatModel;
 import com.backendless.animalfarmtestproject.models.LionModel;
@@ -15,9 +16,6 @@ import java.util.List;
 @Service("lionService")
 @AllArgsConstructor
 public class LionServiceImpl implements CarnivorousService<LionModel> {
-
-    private static final String LION = "lion";
-
     private LionRepository lionRepository;
 
     private HerbivorousService<CowModel> cowService;
@@ -43,7 +41,7 @@ public class LionServiceImpl implements CarnivorousService<LionModel> {
     @Override
     public void createNewAnimal(String name) {
         if (lionRepository.getLionModelByName(name).isPresent()) {
-            throw new AnimalException(FeedErrors.ANIMAL_ALREADY_EXIST, name, LION);
+            throw new AnimalException(FeedErrors.ANIMAL_ALREADY_EXIST, name, Animals.LION.name());
         }
         LionModel lion = new LionModel();
         lion.setName(name);
@@ -54,7 +52,7 @@ public class LionServiceImpl implements CarnivorousService<LionModel> {
     @Override
     public LionModel getAnimalByName(String name) {
         return lionRepository.getLionModelByName(name)
-            .orElseThrow(() -> new AnimalException(FeedErrors.ANIMAL_DOESNT_EXIST, name, LION));
+            .orElseThrow(() -> new AnimalException(FeedErrors.ANIMAL_DOESNT_EXIST, name, Animals.LION.name()));
     }
 
     @Override

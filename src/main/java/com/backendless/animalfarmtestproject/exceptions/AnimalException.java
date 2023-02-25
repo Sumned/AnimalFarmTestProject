@@ -1,5 +1,6 @@
 package com.backendless.animalfarmtestproject.exceptions;
 
+import com.backendless.animalfarmtestproject.enums.FeedErrors;
 import com.backendless.animalfarmtestproject.models.CowModel;
 import com.backendless.animalfarmtestproject.models.GoatModel;
 import com.backendless.animalfarmtestproject.models.Meat;
