@@ -46,7 +46,6 @@ create table grass
 (
   id    BIGINT      NOT NULL UNIQUE AUTO_INCREMENT,
   creating_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  last_modification_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   primary key (id),
   cow_id BIGINT,
   goat_id BIGINT,

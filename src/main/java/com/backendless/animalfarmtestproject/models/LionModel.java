@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -27,6 +28,12 @@ public class LionModel implements Carnivorous {
 
     @OneToMany(mappedBy = "lion")
     private List<Meat> eaten;
+
+    @Column(name = "creating_date", insertable = false, updatable = false)
+    private LocalDateTime creatingDate;
+
+    @Column(name = "last_modification_date", insertable = false, updatable = false)
+    private LocalDateTime lastModificationDate;
 
 
     @Override

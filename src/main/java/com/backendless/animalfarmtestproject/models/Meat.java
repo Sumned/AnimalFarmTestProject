@@ -4,17 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -23,11 +21,6 @@ import lombok.Setter;
 @Getter
 public abstract class Meat extends Food<Carnivorous> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_generator")
-    @SequenceGenerator(name = "t_generator", sequenceName = "TABLE_SEQUENCE", initialValue = 50)
-    private Long id;
-
     @Column(name = "name")
     private String name;
 
@@ -35,6 +28,12 @@ public abstract class Meat extends Food<Carnivorous> {
     @JoinColumn(name = "lion_id")
     @JsonIgnore
     private LionModel lion;
+
+    @Column(name = "creating_date", insertable = false, updatable = false)
+    private LocalDateTime creatingDate;
+
+    @Column(name = "last_modification_date", insertable = false, updatable = false)
+    private LocalDateTime lastModificationDate;
 
     @Transient
     private String eatenBy;

@@ -1,17 +1,17 @@
 package com.backendless.animalfarmtestproject.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -19,18 +19,18 @@ import lombok.Setter;
 @Getter
 public abstract class Vegetable extends Food<Herbivorous> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_generator")
-    @SequenceGenerator(name = "t_generator", sequenceName = "TABLE_SEQUENCE", initialValue = 50)
-    private Long id;
-
     @ManyToOne
     @JoinColumn(name = "cow_id")
+    @JsonIgnore
     private CowModel cowEater;
 
     @ManyToOne
     @JoinColumn(name = "goat_id")
+    @JsonIgnore
     private GoatModel goatEater;
+
+    @Column(name = "creating_date", insertable = false, updatable = false)
+    private LocalDateTime creatingDate;
 
     @Override
     void eaten(Herbivorous eater) {
