@@ -24,31 +24,31 @@
 
     Лев
         Створення лева:
-            POST запит localhost:8085/lions?name={ім'я}
+            POST запит localhost:8085/lions/{ім'я}
         Список усіх створених левів:
             GET запит localhost:8085/lions
         Отримати лева по імені:
-            Get запит localhost:8085/lions/lion?name={ім'я}
+            Get запит localhost:8085/lions/{ім'я}
         Погодувати лева (для цього спочатку потрібно створити тварин з відповідними іменами): 
-            Put запит localhost:8085/lions/feed?lionName={ім'я лева}&foodName={ім'я тварини}&foodType={cow або goat}
+            Put запит localhost:8085/lions/{ім'я лева}&foodName={ім'я тварини яку згодовуємо}&foodType={cow або goat}
     Корова
         Створення корови:
-            POST запит localhost:8085/cows?name={ім'я}
+            POST запит localhost:8085/cows/{ім'я}
         Список усіх створених корів:
             GET запит localhost:8085/cows
         Отримати корову по імені:
-            Get запит localhost:8085/cows/cow?name={ім'я}
+            Get запит localhost:8085/cows/{ім'я}
         Погодувати корову:
-            PUT запит localhost:8085/cows/feed?name={ім'я (корови)}
+            PUT запит localhost:8085/cows/{ім'я (корови)}
     Коза
         Створення кози:
-            POST запит localhost:8085/goats?name={ім'я}
+            POST запит localhost:8085/goats/{ім'я}
         Список усіх створених кіз:
             GET запит localhost:8085/goats
         Отримати козу по імені:
-            Get запит localhost:8085/goats/goat?name={ім'я}
+            Get запит localhost:8085/goats/{ім'я}
         Погодувати козу:
-            PUT запит localhost:8085/goats/feed?name={ім'я (кози)}
+            PUT запит localhost:8085/goats/{ім'я (кози)}
 
 
 Правила:
