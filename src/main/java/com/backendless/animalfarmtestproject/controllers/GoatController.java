@@ -33,13 +33,13 @@ public class GoatController {
     @PostMapping("/{name}")
     public ResponseEntity<String> createNewGoat(@PathVariable String name) {
         goatService.createNewAnimal(name);
-        return ResponseEntity.ok(String.format("New cow %s created", name));
+        return ResponseEntity.ok(String.format("New goat %s created", name));
     }
 
     @PutMapping("/{name}")
     public ResponseEntity<String> feedGoat(@PathVariable String name) {
         goatService.feedAnimal(name);
-        return ResponseEntity.ok(String.format("Cow %s fed", name));
+        return ResponseEntity.ok(String.format("Goat %s fed", name));
     }
 
 }
